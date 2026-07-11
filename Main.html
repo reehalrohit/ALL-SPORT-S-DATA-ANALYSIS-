@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportsAPI Pro | Ultimate Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0f1115',
+                        card: '#1a1d24',
+                        mint: '#00df89',
+                        mintHover: '#00c478'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0f1115; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        
+        .tab-btn { color: #94a3b8; transition: all 0.3s ease; border-bottom: 2px solid transparent; }
+        .tab-active { color: #00df89; border-bottom: 2px solid #00df89; font-weight: 600; }
+        .hidden-view { display: none; }
+    </style>
+</head>
+<body class="bg-dark text-gray-200 font-sans min-h-screen flex flex-col">
+
+    <header class="bg-card border-b border-gray-800 sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-futbol text-2xl text-mint"></i>
+                <h1 class="text-xl font-bold text-white tracking-wide">SportsAPI <span class="text-mint">Pro</span> Hub</h1>
+            </div>
+            <div class="flex gap-4">
+                <button class="bg-gray-800 hover:bg-gray-700 text-sm px-4 py-2 rounded-lg transition">
+                    <i class="fas fa-bell text-mint mr-2"></i>Push Notifications ON
+                </button>
+            </div>
+        </div>
+        
+        <div class="container mx-auto px-4 overflow-x-auto">
+            <nav class="flex space-x-8 text-sm">
+                <button onclick="switchTab('live')" id="tab-live" class="tab-btn tab-active py-4 whitespace-nowrap">
+                    <i class="fas fa-heartbeat mr-2"></i> Live Score App
+                </button>
+                <button onclick="switchTab('analytics')" id="tab-analytics" class="tab-btn py-4 whitespace-nowrap">
+                    <i class="fas fa-chart-bar mr-2"></i> Analytics Dashboard
+                </button>
+                <button onclick="switchTab('betting')" id="tab-betting" class="tab-btn py-4 whitespace-nowrap">
+                    <i class="fas fa-dice mr-2"></i> Betting & Odds
+                </button>
+                <button onclick="switchTab('media')" id="tab-media" class="tab-btn py-4 whitespace-nowrap">
+                    <i class="fas fa-tv mr-2"></i> Media & Fan Zone
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 flex-grow">
+
+        <section id="view-live" class="view-section">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-white">World Cup 2026 - Knockouts</h2>
+                <span class="bg-red-500/20 text-red-500 border border-red-500/50 px-3 py-1 rounded-full text-xs font-bold animate-pulse">
+                    LIVE NOW
+                </span>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div id="live-match-container" class="lg:col-span-2 space-y-6">
+                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                        <div class="text-center text-gray-400 text-sm mb-4">Semi-Final • 82'</div>
+                        <div class="flex justify-between items-center">
+                            <div class="text-center w-1/3">
+                                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/120px-Flag_of_Brazil.svg.png" class="w-16 h-10 mx-auto mb-2 object-cover rounded shadow">
+                                <h3 class="text-xl font-bold text-white">Brazil</h3>
+                            </div>
+                            <div class="text-4xl font-black text-mint px-6 py-2 bg-gray-900 rounded-lg border border-gray-800">
+                                2 - 1
+                            </div>
+                            <div class="text-center w-1/3">
+                                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/Flag_of_France.svg/120px-Flag_of_France.svg.png" class="w-16 h-10 mx-auto mb-2 object-cover rounded shadow">
+                                <h3 class="text-xl font-bold text-white">France</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-card rounded-xl border border-gray-800 p-6">
+                        <h3 class="text-lg font-bold text-white mb-4 border-b border-gray-800 pb-2">Live Commentary</h3>
+                        <div class="space-y-4 h-48 overflow-y-auto pr-2 text-sm">
+                            <div class="flex gap-4">
+                                <span class="font-bold text-mint">82'</span>
+                                <div><i class="fas fa-futbol text-white mr-1"></i> <b>GOAL BRAZIL!</b> Vinícius Júnior cuts inside from the left wing and curles a magnificent shot into the top right corner. Assist by Rodrygo.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <h3 class="text-lg font-bold text-white mb-4 border-b border-gray-800 pb-2">Match Stats</h3>
+                    <div class="space-y-5 text-sm">
+                        <div>
+                            <div class="flex justify-between mb-1"><span>58%</span><span class="text-gray-400">Possession</span><span>42%</span></div>
+                            <div class="w-full bg-gray-800 rounded-full h-2 flex">
+                                <div class="bg-mint h-2 rounded-l-full" style="width: 58%"></div>
+                                <div class="bg-blue-600 h-2 rounded-r-full" style="width: 42%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-analytics" class="view-section hidden-view">
+            <h2 class="text-2xl font-bold text-white mb-6">Player Performance & Fantasy Tracker</h2>
+            <div class="bg-card rounded-xl border border-gray-800 overflow-hidden">
+                <div class="p-4 bg-gray-900 border-b border-gray-800 flex justify-between items-center">
+                    <h3 class="font-bold">Top Performing Players (Tournament)</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-gray-800/50 text-gray-400 uppercase text-xs">
+                            <tr>
+                                <th class="p-4">Player</th>
+                                <th class="p-4 text-center">Matches</th>
+                                <th class="p-4 text-center">Goals</th>
+                                <th class="p-4 text-center">Assists</th>
+                                <th class="p-4 text-center text-mint font-bold">Fantasy Pts</th>
+                            </tr>
+                        </thead>
+                        <tbody id="analytics-tbody" class="divide-y divide-gray-800">
+                            <tr class="hover:bg-gray-800/50 transition">
+                                <td class="p-4 flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center text-xs">KM</div>
+                                    <div><div class="font-bold text-white">Kylian Mbappé</div><div class="text-xs text-gray-500">France</div></div>
+                                </td>
+                                <td class="p-4 text-center">6</td>
+                                <td class="p-4 text-center">5</td>
+                                <td class="p-4 text-center">2</td>
+                                <td class="p-4 text-center font-bold text-mint">58</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-betting" class="view-section hidden-view">
+            <h2 class="text-2xl font-bold text-white mb-6">Odds Comparison & Risk Analysis</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 bg-card rounded-xl border border-gray-800 p-6">
+                    <h3 class="text-lg font-bold text-white mb-4">Argentina vs England (Tomorrow, 20:00)</h3>
+                    <div id="odds-list" class="space-y-3">
+                        <div class="flex justify-between items-center bg-gray-900 p-3 rounded-lg border border-gray-800">
+                            <div class="w-1/4 font-bold text-white">Bet365 API</div>
+                            <div class="flex w-3/4 gap-2 text-center text-sm font-bold">
+                                <div class="w-1/3 bg-gray-800 p-2 rounded hover:bg-mint hover:text-black transition">1 (ARG) 2.45</div>
+                                <div class="w-1/3 bg-gray-800 p-2 rounded hover:bg-mint hover:text-black transition">X (Draw) 3.10</div>
+                                <div class="w-1/3 bg-gray-800 p-2 rounded hover:bg-mint hover:text-black transition">2 (ENG) 2.80</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-card rounded-xl border border-gray-800 p-6">
+                    <h3 class="text-lg font-bold text-white mb-4"><i class="fas fa-calculator text-mint mr-2"></i>Betting Calculator</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-1">Stake Amount ($)</label>
+                            <input type="number" id="stake" value="100" class="w-full bg-gray-900 border border-gray-700 rounded p-2 text-white outline-none focus:border-mint" oninput="calculatePayout()">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-1">Decimal Odds</label>
+                            <input type="number" id="odds" value="2.50" step="0.01" class="w-full bg-gray-900 border border-gray-700 rounded p-2 text-white outline-none focus:border-mint" oninput="calculatePayout()">
+                        </div>
+                        <div class="pt-4 border-t border-gray-800">
+                            <div class="flex justify-between text-sm mb-1"><span>Potential Profit:</span> <span id="profit" class="text-mint font-bold">+$150.00</span></div>
+                            <div class="flex justify-between text-lg font-bold text-white"><span>Total Payout:</span> <span id="payout">$250.00</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-media" class="view-section hidden-view">
+             <h2 class="text-2xl font-bold text-white mb-6">Fan Engagement & Content Overlays</h2>
+             <p class="text-gray-400">Media content goes here...</p>
+        </section>
+
+    </main>
+
+    <script>
+        // 1. Tab Switching Logic
+        function switchTab(tabId) {
+            // Hide all sections
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden-view'));
+            
+            // Remove active styles
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('tab-active');
+                el.classList.add('text-gray-400');
+            });
+            
+            // Show current section and activate tab
+            document.getElementById('view-' + tabId).classList.remove('hidden-view');
+            const activeTab = document.getElementById('tab-' + tabId);
+            activeTab.classList.add('tab-active');
+            activeTab.classList.remove('text-gray-400');
+
+            // Trigger the correct API fetch based on the selected tab
+            if(tabId === 'live') fetchLiveMatches();
+            if(tabId === 'analytics') fetchAnalytics();
+            if(tabId === 'betting') fetchOdds();
+        }
+
+        // 2. Fetch Live Matches from Vercel Backend
+        async function fetchLiveMatches() {
+            try {
+                const response = await fetch('/api/live');
+                if (!response.ok) throw new Error('Failed to fetch live matches');
+                
+                const data = await response.json();
+                console.log('✅ Real Live Matches Received:', data);
+                
+                // When you are ready, you will write code here to inject `data` 
+                // into document.getElementById('live-match-container')
+                
+            } catch (error) {
+                console.error('Error fetching live matches:', error);
+            }
+        }
+
+        // 3. Fetch Analytics from Vercel Backend
+        async function fetchAnalytics() {
+            try {
+                const response = await fetch('/api/analytics');
+                if (!response.ok) throw new Error('Failed to fetch analytics');
+                
+                const data = await response.json();
+                console.log('✅ Real Analytics Received:', data);
+                
+                // Inject into document.getElementById('analytics-tbody')
+            } catch (error) {
+                console.error('Error fetching analytics:', error);
+            }
+        }
+
+        // 4. Fetch Odds from Vercel Backend
+        async function fetchOdds() {
+            try {
+                const response = await fetch('/api/odds');
+                if (!response.ok) throw new Error('Failed to fetch odds');
+                
+                const data = await response.json();
+                console.log('✅ Real Odds Received:', data);
+                
+                // Inject into document.getElementById('odds-list')
+            } catch (error) {
+                console.error('Error fetching odds:', error);
+            }
+        }
+
+        // 5. Betting Calculator Logic
+        function calculatePayout() {
+            const stake = parseFloat(document.getElementById('stake').value) || 0;
+            const odds = parseFloat(document.getElementById('odds').value) || 0;
+            
+            const payout = stake * odds;
+            const profit = payout - stake;
+            
+            document.getElementById('payout').innerText = '$' + payout.toFixed(2);
+            document.getElementById('profit').innerText = '+$' + profit.toFixed(2);
+        }
+
+        // Load live data immediately when the page opens
+        window.addEventListener('DOMContentLoaded', fetchLiveMatches);
+    </script>
+</body>
+    </html>
+    
