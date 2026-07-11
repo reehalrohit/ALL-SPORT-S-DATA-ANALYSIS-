@@ -1,16 +1,16 @@
 export default async function handler(req, res) {
-    // Fetch the secret key from Vercel
-    const API_KEY = process.env.SPORTS_API_KEY;
+    // Fetch the secret key from Vercel Environment Variables
+    const API_KEY = process.env.SPORTDB_API_KEY;
 
-    // The official V2 Football Live endpoint
-    const apiUrl = 'https://api.sportsapipro.com/v2/football/live';
+    // The SportDB Flashscore Live Football endpoint
+    const apiUrl = 'https://api.sportdb.dev/api/flashscore/football/live';
 
     try {
         const response = await fetch(apiUrl, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': API_KEY // Required header format
+                'X-API-Key': API_KEY // Updated header format
             }
         });
 
@@ -24,7 +24,7 @@ export default async function handler(req, res) {
         return res.status(200).json(data);
 
     } catch (error) {
-        console.error("Backend fetch error (Live):", error);
+        console.error("Backend fetch error (Flashscore Live):", error);
         return res.status(500).json({ error: 'Failed to fetch live sports data' });
     }
 }
