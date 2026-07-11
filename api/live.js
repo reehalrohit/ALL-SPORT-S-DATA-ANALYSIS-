@@ -1,18 +1,16 @@
-// This runs securely on Vercel's backend!
 export default async function handler(req, res) {
-    // 1. Grab the secret API key from Vercel's Environment Variables
+    // Fetch the secret key from Vercel
     const API_KEY = process.env.SPORTS_API_KEY;
 
-    // 2. The exact URL for SportsAPI Pro
-    const apiUrl = 'https://api.sportsapipro.com/v1/fixtures/live';
+    // The official V2 Football Live endpoint
+    const apiUrl = 'https://api.sportsapipro.com/v2/football/live';
 
     try {
-        // 3. Make the fetch request from the backend
         const response = await fetch(apiUrl, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': API_KEY // Securely injected!
+                'x-api-key': API_KEY // Required header format
             }
         });
 
@@ -22,11 +20,11 @@ export default async function handler(req, res) {
 
         const data = await response.json();
 
-        // 4. Send the data back to your frontend
+        // Send the JSON response to the frontend
         return res.status(200).json(data);
 
     } catch (error) {
-        console.error("Backend fetch error:", error);
+        console.error("Backend fetch error (Live):", error);
         return res.status(500).json({ error: 'Failed to fetch live sports data' });
     }
 }
